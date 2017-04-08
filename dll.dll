@@ -1,0 +1,20 @@
+DLL a Inyectar [ASM] 
+format PE GUI 4.0 DLL
+entry DllEntryPoint
+
+include 'C:\fasm\INCLUDE\WIN32AX.INC'
+
+section '.code' code readable executable
+ proc DllEntryPoint hinstDLL,fdwReason,lpvReserved
+     
+   cmp [fdwReason],1
+      JE mensaje
+      mensaje:
+      invoke MessageBox,0,"Kiere Pelea?","Ola Ke Ase?",MB_OK
+      ret
+ endp
+ 
+ section '.idata' import data readable writeable
+  library user,'USER32.DLL'
+import user,\
+       MessageBox, 'MessageBoxA'
